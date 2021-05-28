@@ -5,11 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @Configuration
 @EnableGlobalMethodSecurity( securedEnabled = true )
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class SecurityConfig implements  WebConfig {
+public class SecurityConfig extends  WebConfig implements WebConfigInterface {
 
     @Override
     @Autowired
@@ -40,6 +41,7 @@ public class SecurityConfig implements  WebConfig {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
+
 
 
 

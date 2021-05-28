@@ -1,12 +1,21 @@
 package com.therealdanvega.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public interface WebConfig {
-    @Autowired
-    void configureAuth(AuthenticationManagerBuilder auth) throws Exception;
 
-    void configure(HttpSecurity http) throws Exception;
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        WebMvcConfigurer.super.addViewControllers(registry);
+        registry.addViewController("/login").setViewName("auth/login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
+
+
+
 }
